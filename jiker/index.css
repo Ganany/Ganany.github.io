@@ -3,7 +3,8 @@
     padding: 0;
 }
 body{
-    width: 1440px;
+    width: 100%;
+    min-width: 1200px;
     background: #F5F5F5;
     z-index: -100;
     display: flex;
@@ -13,7 +14,7 @@ body{
     margin-top: 0;
 }
 .header{
-    width: 1440px;
+    width: 100%;
     height: 64px;
     background: #FFFFFF;
     box-shadow: 0px -1px 0px 0px rgba(0, 0, 0, 0.15);
@@ -25,7 +26,11 @@ body{
     width: 65px;
     height: 25px;
     margin-right: 50px;
-    margin-left: 20px;
+    margin-left: 0
+}
+.left-header{
+    display: flex;
+    flex-wrap: nowrap;
 }
 .left-header a{
     height: 22px;
@@ -36,6 +41,7 @@ body{
     line-height: 22px;
     text-decoration: none;
     margin-left: 30px;
+    white-space: nowrap;
 }
 .search input{
     width: 246px;
@@ -78,31 +84,35 @@ input::placeholder{
     color: rgba(0, 0, 0, 0.85);
     text-decoration: none;
     margin-left: 8px;
+    white-space: nowrap;
 }
 .person{
     width: 32px;
     height: 32px;
 }
 .banner{
-    position: relative;
-}
-.banner-img{
     background-image: url(./bannerBG.png);
-    width: 1440px;
+    width: 100%;
     height: 184px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .banner-text1{
+    width: 1180px;
     height: 20px;
     font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;
     color: #FFFFFF;
     line-height: 20px;
+    text-align: left;
     position: absolute;
-    top: 24px;
-    left: 130px;
+    top: 20px;
 }
 .banner-text2{
+    display: inline-block;
     height: 36px;
     font-size: 28px;
     font-family: AlibabaPuHuiTiH;
@@ -110,7 +120,7 @@ input::placeholder{
     line-height: 36px;
     position: absolute;
     top: 56px;
-    left: 573px;
+    text-align: center;
 }
 .small-line{
     display: inline-block;
@@ -129,16 +139,24 @@ input::placeholder{
     line-height: 22px;
     position: absolute;
     top: 108px;
-    left: 651px;
+    text-align: center;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .title{
+    width: 1180px;
     height: 32px;
     font-size: 24px;
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);
     line-height: 32px;
-    margin: 40px 0 0 125px; 
+    margin: 40px 0 0 0; 
+    text-align: left;
 }
 .line{
     width: 1180px;
@@ -150,23 +168,23 @@ input::placeholder{
     margin-top: 20px;
 }
 .subtitle{
+    width: 1180px;
     height: 26px;
     font-size: 18px;
     font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: #000000;
     margin-top: 30px;
-    margin-left: 8px;
     line-height: 26px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
 }
 .line-background{
     display: inline-block;
     width: 4px;
     height: 16px;
     background: rgba(27, 3, 238, 0.2);
-    margin-left: 125px;
     position: relative;
     margin-right: 14px;
 }
@@ -257,7 +275,7 @@ input::placeholder{
     background: #FFFFFF;
     box-shadow: 0px 4px 4px -2px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
-    margin: 30px 0 0 130px;
+    margin: 30px 0 0 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -299,7 +317,7 @@ input::placeholder{
     background: blue;
 }
 .ft-link{
-    width: 1440px;
+    width: 100%;
     height: 64px;
     background: rgba(0, 0, 0, 0.85);
     display: flex;
@@ -324,7 +342,7 @@ input::placeholder{
 }
 .ft-info{
     background: rgba(0, 0, 0, 0.85);
-    width: 1440px;
+    width: 100%;
     height: 48px;
     font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
