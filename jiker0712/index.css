@@ -1,0 +1,284 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 100%;
+    display: flex;
+    min-width: 1000px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.header{
+    width: 1000px;
+    height: 66px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width: auto;
+    height: 40px;
+    margin-right: 40px;
+}
+.logo:hover{
+    cursor: pointer;
+}
+.nav span{
+    display: inline-block;
+    box-sizing: border-box;
+    line-height: 67px;
+    height: 67px;
+    font-size: 18px;
+    color: #3E3A3A;
+    text-decoration: none;
+    margin-right: 26px;
+}
+.nav span:hover{
+    color:#4F6FDA;
+    border-bottom:5px solid #4F6FDA;
+    cursor: pointer;
+}
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 140px;
+    margin-right: 15px;
+}
+.search{
+    width: 234px;
+    height: 39px;
+    border: 1px solid #D8D8D8;
+    font-size: 15px;
+    color: #333;
+    box-sizing: border-box;
+    padding: 12px 40px 12px 11px;
+}
+.search::placeholder{
+    opacity: 0.3;
+}
+.search-form{
+    position: relative;
+}
+.search-icon{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 36px;
+    height: 35px;
+    object-fit: cover;
+}
+.login-container{
+    display: flex;
+}
+.login-btn{
+    width: 66px;
+    height: 33px;
+    font-size: 15px;
+    color: #4F6FDA;
+    background: #FFF;
+    border: 1px solid #4F6FDA;
+    border-radius: 17px;
+    text-align: center;
+    line-height: 33px;
+    margin-right: 10px;
+}
+.login-btn:hover{
+    color: #FFF;
+    background: #4F6FDA;
+    cursor: pointer;
+}
+.mainer{
+    background: #F5F5F5;
+    width: 100%;
+    min-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title-container{
+    width: 1000px;
+    margin-top: 33px;
+    margin-bottom: 22px;
+}
+.title-container span,.pre-page{
+    font-size: 16px;
+    color: #466DE1;
+    margin: 33px 0 20px 0;
+    text-decoration: none;
+}
+.title-container span{
+    margin: 0 5px 0;
+}
+.introduction{
+    width: 1000px;
+    height: 300px;
+    display: flex;
+    background: #FFF;
+    position: relative;
+}
+.intro-img img{
+    width: 400px;
+    height: 240px;
+    margin: 30px 20px 30px 30px;
+}
+.intro-text{
+    width: 520px;
+    height: 240px;
+    margin: 30px 30px 30px 0;
+}
+.intro-title{
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+}
+.intro-description{
+    font-size: 16px;
+    color: #666;
+    line-height: 24px;
+    margin-top: 17px;
+}
+.start-btn{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 180px;
+    height: 50px;
+    font-size: 18px;
+    color: #FFF;
+    line-height: 50px;
+    text-align: center;
+    background: #466DE1;
+    cursor: pointer;
+    outline: none;
+}
+.intro-info{
+    font-size: 14px;
+    color: #999;
+    line-height: 26px;
+    margin-top:65px;
+}
+.main-mainer{
+    width: 1000px;
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+.left-mainer{
+    display: inline-block;
+    width: 700px;
+    margin-right: 20px;
+    background: #FFF;
+    padding-bottom: 25px;
+    box-sizing: border-box;
+}
+.right-mainer{
+    display: inline-block;
+    width: 280px;
+    margin-right: 20px;
+}
+.curriculum-card img{
+    width: 90px;
+    height: 60px;
+}
+.chapter-title{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin: 40px 0 10px 30px;
+}
+.chapter-content{
+    width: 700px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 50px;
+}
+.chapter-content:hover{
+    background: rgba(208, 198, 252, 0.15);
+    cursor: pointer;
+}
+.content-text{
+    font-size: 14px;
+    color: #666;
+}
+.play-btn{
+    width: 16px;
+    height: 16px;
+    background: url(./image/play.png);
+}
+.chapter-content:hover .content-text{
+    color: blue;
+}
+.chapter-content:hover .play-btn{
+    background:url(./image/play-blue.png);
+}
+.curriculum-info-container{
+    width: 280px;
+    padding: 20px 30px 40px;
+    background: #FFF;
+    box-sizing: border-box;
+}
+.info-title{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+.info-content{
+    font-size: 14px;
+    color: #727171;
+    line-height: 20px;
+    margin: 5px 0 5px;
+}
+.difficulty{
+    margin: 30px 0 30px;
+}
+.difficulty div{
+    display: inline-block;
+}
+.more-curriculum-container{
+    width: 280px;
+    height: 400px;
+    background: #FFF;
+    box-sizing: border-box;
+    padding: 20px 30px 30px 30px;
+    margin-top: 20px;
+}
+.more-title{
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+.curriculum-card{
+    width: 280px;
+    height: 60px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+.curriculum-card:hover{
+    cursor: pointer;
+}
+.curriculum-card span{
+    font-size: 14px;
+    color: #666;
+    margin: 7px 3px 0px 11px;
+}
+.footer{
+    width: 100%;
+    min-width: 1000px;
+    height: 40px;
+    background: black;
+    font-size: 12px;
+    color: #666;
+    line-height: 40px;
+    text-align: center;
+}
