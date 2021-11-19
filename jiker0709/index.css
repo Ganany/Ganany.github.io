@@ -2,17 +2,19 @@
     margin: 0;
     padding: 0;
 }
-html{
+.html{
     width: 100%;
 }
 .mainer{
     width: 100%;
+    min-width: 1100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .top-mainer{
+    min-width: 1100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -20,6 +22,7 @@ html{
     align-items: center;
 }
 body{
+    min-width: 1100px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -106,27 +109,27 @@ body{
     cursor: pointer;
 }
 .banner{
+    width: 100%;
+    height: 519px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     min-width: 1100px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 65px;
+    object-fit: cover;
+    overflow: hidden;
 }
 .banner img{
-    width: 100%;
-    min-width: 1100px;
-    max-width: 1920px;
-    object-fit: cover;
+    width: 1920px;
+    height: 519px;
 }
 .switch-container{
     position: absolute;
     bottom: 38px;
-    margin-right: auto;
-    margin-left: auto;
+    left: 46%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,6 +149,7 @@ body{
     border-radius: 50%;
 }
 .practice-title-container{
+    width: 100%;
     position: relative;
 }
 .practice-title{
@@ -155,7 +159,7 @@ body{
     text-align: center;
 }
 .practice-sub-title{
-    width: 1920px;
+    width: 100%;
     position: absolute;
     top: -25px;
     height: 26px;
@@ -169,11 +173,11 @@ body{
     color: #666;
     margin-top: 4px;
     text-align: center;
-    width: 1920px;
+    width: 100%;
 }
 .practice-block{
     margin-top: 30px;
-    width: 1920px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -182,7 +186,7 @@ body{
 .practice-line{
     margin-top: 20px;
     margin-bottom: 80px;
-    width: 1920px;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -236,9 +240,10 @@ body{
 }
 .title-container{
     position: relative;
+    width: 100%;
 }
 .title{
-    width: 1920px;
+    width: 100%;
     font-size: 24px;
     font-weight: 600;
     color: #333333;
@@ -247,7 +252,7 @@ body{
     top: 20px;
 }
 .sub-title{
-    width: 1920px;
+    width: 100%;
     font-size: 37px;
     color: #FFF;
     text-align: center;
@@ -257,11 +262,11 @@ body{
     color: #666;
     margin-top: 4px;
     text-align: center;
-    width: 1920px;
+    width: 100%;
 }
 .curriculum-block{
     margin-top: 50px;
-    width: 1920px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
