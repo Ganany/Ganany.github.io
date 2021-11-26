@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>NavigatorBar</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .h400{
+      height: 400px;
+      border: 1px solid #e4e4e4;
+      color: #666;
+      padding: 20px;
+    }
+    .h800{
+      height: 800px;
+      border: 1px solid #e4e4e4;
+      color: #666;
+      padding: 20px;
+    }
+    .navigator-bar {
+      height: 60px;
+    }
+    .navigator-bar ul{
+      display: flex;
+      list-style-type: none;
+      background: #f5f5f5;
+    }
+    .navigator-bar.fixed-top ul{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .navigator-bar-item{
+      flex: 1;
+      line-height: 60px;
+      text-align: center;
+      cursor: pointer;
+      color: #666;
+      transition: all .2s ease;
+    }
+    .navigator-bar-item:hover{
+      background: #666;
+      color: #fff;
+    }
+    .navigator-bar-item.active{
+      background: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="section-banner h400">SECTION Banner</div>
+  <div class="navigator-bar" id="navigator-bar">
+    <ul>
+      <li class="navigator-bar-item" data-nav="section-1">SECTION 1</li>
+      <li class="navigator-bar-item" data-nav="section-2">SECTION 2</li>
+      <li class="navigator-bar-item" data-nav="section-3">SECTION 3</li>
+      <li class="navigator-bar-item" data-nav="section-4">SECTION 4</li>
+      <li class="navigator-bar-item" data-nav="section-5">SECTION 5</li>
+    </ul>
+  </div>
+  <div class="h400" id="section-1">SECTION 1</div>
+  <div class="h400" id="section-2">SECTION 2</div>
+  <div class="h400" id="section-3">SECTION 3</div>
+  <div class="h400" id="section-4">SECTION 4</div>
+  <div class="h400" id="section-5">SECTION 5</div>
+  <div class="h800">SECTION Footer</div>
+
+  <script type="text/javascript">
+    const PAGE = {
+      data: {
+        navigatorBarIdArr: ['section-1','section-2','section-3','section-4','section-5'],
+        navigatorBarActiveId: '',
+        navigatorBarFixed: false,
+        navigatorBarFixedOffset: 460,
+        navigatorBarHeight: 60,
+      },
+      init: function() {
+        this.bind();
+      },
+      bind: function() {
+        window.addEventListener('scroll',this.refreshNavigator);
+        let navigatorBar = document.getElementById('navigator-bar');
+        this.onEventLister(navigatorBar,'click','navigator-bar-item',this.goNavigator);
+      },
+      onEventLister: function(parentNode,action,childClassName,callback) {
+        parentNode.addEventListener(action,function(e){
+          e.target.className.indexOf(childClassName) >= 0 && callback(e);
+        })
+      },
+      refreshNavigator: function(e) {
+        PAGE.fixedNavigator();
+        PAGE.heightLightNavigator();
+      },
+      fixedNavigator: function() {
+        let scrollTop = document.documentElement.scrollTop;
+        let navigatorBarTop = (PAGE.data.navigatorBarFixedOffset + PAGE.data.navigatorBarHeight);
+        let navigatorBarFixed = scrollTop >= navigatorBarTop;
+        if( PAGE.data.navigatorBarFixed !== navigatorBarFixed){
+          PAGE.data.navigatorBarFixed = navigatorBarFixed;
+          let navigatorBar = document.getElementById('navigator-bar');
+          if(navigatorBarFixed){
+            navigatorBar.className = 'navigator-bar fixed-top'
+          }else{
+            navigatorBar.className = 'navigator-bar'
+          }
+        }
+      },
+      heightLightNavigator: function() {
+        let scrollTop = document.documentElement.scrollTop;
+        let filterNav = PAGE.data.navigatorBarIdArr.filter( data => {
+          let offsetTop = document.getElementById(data).offsetTop;
+          return scrollTop >= offsetTop - PAGE.data.navigatorBarHeight
+        })
+        let navigatorBarActiveId = filterNav.length ? filterNav[filterNav.length - 1] : '';
+        if(PAGE.data.navigatorBarActiveId !== navigatorBarActiveId){
+          PAGE.data.navigatorBarActiveId = navigatorBarActiveId;
+          let navigatorBarItems = document.getElementsByClassName('navigator-bar-item');
+          for (let i = 0; i < navigatorBarItems.length; i++) {
+            let navigatorBarItem = navigatorBarItems[i];
+            let dataNav = navigatorBarItem.dataset.nav;
+            if(dataNav === navigatorBarActiveId){
+              navigatorBarItem.className = 'navigator-bar-item active';
+            }else{
+              navigatorBarItem.className = 'navigator-bar-item';
+            }
+          }
+        }
+      },
+      goNavigator: function(e) {
+        let id = e.target.dataset.nav;
+        let offsetTop = document.getElementById(id).offsetTop - PAGE.data.navigatorBarHeight;
+        document.documentElement.scrollTop = offsetTop;
+      }
+    }
+
+    PAGE.init();
+  </script>
+</body>
+</html>

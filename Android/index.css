@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.android{
+    margin-top:240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: moving 2s ease-in-out infinite;
+}
+@keyframes moving{
+    65%{transform: translateY(-100px) scale(1.1);}
+
+}
+.head{
+    position: relative;
+    width: 150px;
+    height: 54px;
+    background-color: #ABC828;
+    border-top-left-radius: 75px 54px;
+    border-top-right-radius: 75px 54px;
+    animation: slope 2s ease-in-out infinite;
+}
+@keyframes slope{
+    65%{
+        transform-origin: 100% 100%;
+        transform: rotate(45deg);
+    }
+}
+.eye{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute;
+    animation: colorful 2s linear infinite;
+}
+.left-eye{
+    top: 25px;
+    left: 30px;
+}
+.right-eye{
+    top: 25px;
+    right: 30px;
+}
+.touch{
+    width: 5px;
+    height: 30px;
+    position: absolute;
+    background-color: #ABC828;
+    border-radius: 10px;
+    top: -15px;
+    animation: colorful 2s linear infinite;
+}
+@keyframes colorful{
+    65%{background-color: #152c5e;}
+    0%{background-color: #ff0000;}
+}
+.left-touch{
+    left: 18px;
+    transform: rotate(-30deg);
+}
+.right-touch{
+    right: 18px;
+    transform: rotate(30deg);
+}
+.body{
+    width: 150px;
+    height: 125px;
+    background-color: #ABC828;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    margin-top: 5px;
+}
+.hand{
+    position: absolute;
+    width: 30px;
+    height: 91px;
+    border-radius: 15px;
+    top: 12px;
+    background-color: #ABC828;
+}
+.left{
+    position: absolute;
+    left: -32px;
+    top: 12px;
+    animation: left-spin-hand 2s ease-in-out infinite;
+}
+.right-hand{
+    right: -32px;
+    animation: right-spin-hand 2s ease-in-out infinite;
+}
+@keyframes left-spin-hand{
+    65%{transform-origin:50% 10%;transform: rotate(180deg);}
+}
+@keyframes right-spin-hand{
+    65%{transform-origin: right 40px;transform: rotate(-30deg);}
+}
+.food{
+    margin-top:75px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ABC828;
+    position: relative;
+    right: 20px;
+}
+.footer{
+    width: 150px;
+    height: 50px;
+    position: relative;
+}
+.foot{
+    width: 30px;
+    height: 50px;
+    border-radius: 15px;
+    background-color: #ABC828;
+    position: absolute;
+    top: 0px;
+}
+.left-foot{
+    left: 30px;
+    animation: right-spin 2s ease-in-out infinite;
+}
+.right-foot{
+    right: 30px;
+    animation: left-spin 2s ease-in-out infinite;
+}
+@keyframes left-spin{
+    65%{transform-origin: left 40px;transform: rotate(30deg);}
+}
+@keyframes right-spin{
+    65%{transform-origin: right 40px;transform: rotate(-30deg);}
+}
+.shadow{
+    width: 50px;
+    height:30px;
+    background-color: #ccc;
+    border-radius:25px 15px;
+    box-shadow: 0 0 10px 10px #ccc;
+    transform:scaleY(0.4) ;
+    animation:shrink 2s ease-in-out infinite;
+    position: absolute;
+    bottom: -70px;
+}
+@keyframes shrink{
+    65%{width: 150px;
+        height: 60px;
+        border-radius: 75px 30px;
+        box-shadow: 0 0 20px 20px #ccc;}
+}
