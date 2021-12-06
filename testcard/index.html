@@ -86,24 +86,26 @@
                 this.onEvent(options,'click',"option",this.judgment)
             },
             judgment:function(e){
-                if (PAGE.data.isLock === false){
-                    PAGE.data.isLock = true;
-                    let index = PAGE.data.persentQ;
-                    let question = PAGE.data.questions[index];
-                    let choice = e.target;
-                    let choiceIndex = choice.dataset.index;
-                    if(choiceIndex == question.correct ){
+                if (PAGE.data.isLock === true){
+                    return
+                };
+                let index = PAGE.data.persentQ;
+                let question = PAGE.data.questions[index];
+                let choice = e.target;
+                let choiceIndex = choice.dataset.index;
+                if(choiceIndex == null){
+                    PAGE.data.isLock = false
+                }else if(choiceIndex == question.correct ){
                         choice.className += " true"
                         choice.parentNode.className += " true"
-                        choice.children[0].className += " true"
-                    }else{
+                        //choice.children[0].className += " true"
+                        PAGE.data.isLock = true
+                    }else if(choiceIndex != question.correct){
                         choice.className += " false"
                         choice.parentNode.className += " false"
-                        choice.children[0].className += " false"
+                       // choice.children[0].className += " false"
+                       PAGE.data.isLock = true
                     }
-                }else{
-                    return
-                }
             },
             onEvent:function(parentNode,action,childClassName,callback){
                parentNode.addEventListener(action,function(e){
@@ -136,16 +138,16 @@
             </div>
             <div class="title" id="title">${question.title}</div>
             <div class="option-containers" id="options">
-                <div class="option-container" data-index="0">
+                <div class="container" data-index="0">
                     <div class="option" data-index="0">${question.options[0]}</div>
                 </div>
-                <div class="option-container" data-index="1">
+                <div class="container" data-index="1">
                     <div class="option" data-index="1">${question.options[1]}</div>
                 </div>
-                <div class="${question.options[2]=='' ? '':'option-container'}" data-index="2">
+                <div class="${question.options[2]=='' ? 'none':'container'}" data-index="2">
                     <div class="${question.options[3]=='' ? '':'option'}" data-index="2">${question.options[2]}</div>
                 </div>
-                <div class="${question.options[3]=='' ? '':'option-container'}" data-index="3">
+                <div class="${question.options[3]=='' ? 'none':'container'}" data-index="3">
                     <div class="${question.options[3]=='' ? '':'option'}" data-index="3">${question.options[3]}</div>
                 </div>
             </div>

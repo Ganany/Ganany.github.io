@@ -12,6 +12,9 @@
     flex-direction: column;
     position: relative;
 }
+.none{
+    display: none;
+}
 .header{
     background-color: #ececec;
     height: 40px;
@@ -41,27 +44,36 @@
     width: 610px;
     height: 35px;
 }
-.option-container{
+.option-containers{
+    margin-left: 25px;
+    width: 610px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.container{
     border: 2px solid #ececec;
-    margin: 10px 25px 10px 25px;
+    width: 610px;
     height: 40px;
     border-radius: 5px;
     
 }
-.option:hover,.option-container{
+.option:hover{
     cursor: pointer;
 }
-.option-container.true{
+.container.true{
     background-color: #59c014;
 }
-.option-container.true::after{
+.container.true::after{
     content: '√';
     color: #ffffff;
 }
-.option-container.false{
+.container.false{
     background-color: #e03838;
 }
-.option-container.false::after{
+.container.false::after{
     content: '×';
     color: #ffffff;
     font-size: 20px;
