@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MessageBorad</title>
+    <style>
+        .todos-content{
+        
+      margin-top: 150px;
+      margin-bottom: 75px;
+      position: relative;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .input{
+      display: block;
+      width: 800px;
+      padding: 16px 16px 16px 50px;
+      border: none;
+      outline: none;
+      font-weight: 200;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    }
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .card-list-contaienr{
+          position: relative;
+          width: 800px;
+          height: 400px;
+          background: #f5f5f5;
+          margin: 0 auto;
+          overflow: hidden;
+        }
+        .card-item{
+          position: absolute;
+          top: 50px;
+          left: 50px;
+          width: 100px;
+          height: 100px;
+          background-color: #ccc;
+          padding: 10px;
+          color: #fff;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="todos-content">
+          <input id="input" class="input" type="text" name="todo" placeholder="请输入内容">
+    </div>
+    <div class="card-list-contaienr" id="card-list">
+        <div class="card-item">haha</div>
+    </div>
+    <script>
+        const PAGE = {
+            data:{
+                backColors:['red','blue','green','yellow'],
+                cardContent:['hello','hi','你好','good'],
+                cardWidth:100,
+                cardHeight:100,
+                paddingOffset:50,
+                zIndex:0,
+                clickCard:null,
+                cardOffsetTop:null,
+                cardOffsetLeft:null,
+                pageX:null,
+                pageY:null,
+                isLock:true,
+            },
+            init:function(){
+                this.setCard();
+                this.bind();
+            },
+            bind:function(){
+                let containerList = document.getElementById("card-list");
+                this.onEventLister(containerList,'mousedown',"card-item",this.mouseDown);
+                let input = document.getElementById('input');
+                input.addEventListener('keyup',this.addOne);
+                window.addEventListener('mousemove',this.mousemove);
+                window.addEventListener('mouseup',this.mouseup);
+            },
+            addOne:function(e){
+                let value = this.value.trim();
+                if (e.which !== 13 || !value){
+                    return
+                };
+                this.value = '';
+                PAGE.addCard(value);
+            },
+            randomRgbColor:function() { //随机生成RGB颜色
+                var r = Math.floor(Math.random() * 256); //随机生成256以内r值
+                var g = Math.floor(Math.random() * 256); //随机生成256以内g值
+                var b = Math.floor(Math.random() * 256); //随机生成256以内b值
+                return `rgb(${r},${g},${b})`; //返回rgb(r,g,b)格式颜色
+                    },
+            mousemove:function(e){
+                let isLock = PAGE.data.isLock;
+                if (!isLock){
+                    let containerList = document.getElementById("card-list");
+                    let containerWidth = containerList.offsetWidth;
+                    let containerHeight = containerList.offsetHeight;
+                    let cardWidth = PAGE.data.cardWidth;
+                    let cardHeight = PAGE.data.cardHeight;
+                    let paddingOffset = PAGE.data.paddingOffset;
+                    let maxLeft = containerWidth - cardWidth - paddingOffset;
+                    let maxTop = containerHeight - cardHeight - paddingOffset;
+                    let translateX = e.pageX - PAGE.data.pageX + PAGE.data.cardOffsetLeft;
+                    let translateY = e.pageY - PAGE.data.pageY + PAGE.data.cardOffsetTop;
+                    translateX = translateX > paddingOffset ? translateX : paddingOffset;
+                    translateX = translateX < maxLeft ? translateX : maxLeft;
+                    translateY = translateY > paddingOffset ? translateY : paddingOffset;
+                    translateY = translateY < maxTop ? translateY : maxTop;
+                    PAGE.data.clickCard.style.left = translateX + 'px';  
+                    PAGE.data.clickCard.style.top = translateY + 'px';
+                };
+            },
+            mouseup:function(){
+                PAGE.data.isLock = true;
+            },
+            onEventLister:function(parentNode,action,childClassName,callback){
+                parentNode.addEventListener(action,function(e){
+                    e.target.className.indexOf(childClassName) >=0 && callback(e)
+                })
+            },
+            mouseDown:function(e){
+                let card = e.target;
+                card.style.zIndex = ++PAGE.data.zIndex;
+                PAGE.data.cardOffsetLeft = card.offsetLeft;
+                PAGE.data.cardOffsetTop = card.offsetTop;
+                PAGE.data.pageX = e.pageX;
+                PAGE.data.pageY = e.pageY;
+                PAGE.data.clickCard = card;
+                PAGE.data.isLock = false;
+            },
+            setCard:function(){
+                
+                PAGE.data.cardContent.forEach(data =>PAGE.addCard(data));
+            },
+            addCard:function(data){
+                let containerList = document.getElementById("card-list");
+                let containerWidth = containerList.offsetWidth;
+                let containerHeight = containerList.offsetHeight;
+                let cardWidth = PAGE.data.cardWidth;
+                let cardHeight = PAGE.data.cardHeight;
+                let paddingOffset = PAGE.data.paddingOffset;
+                let maxLeft = containerWidth - cardWidth - paddingOffset;
+                let maxTop = containerHeight - cardHeight - paddingOffset;
+                let leftX = PAGE.rangeBetween(paddingOffset,maxLeft);
+                let topY = PAGE.rangeBetween(paddingOffset,maxTop);
+                let zIndex = ++PAGE.data.zIndex;
+                //let backColors = PAGE.data.backColors; 
+                //let backColor = backColors[zIndex % backColors.length];
+                let backColor = PAGE.randomRgbColor();
+                let newCard = document.createElement('div');
+                newCard.setAttribute('class',"card-item");
+                newCard.innerText = data;
+                let cardStyle = `
+                        left:${leftX}px;
+                        top:${topY}px;
+                        z-index:${zIndex};
+                        background:${backColor};`;
+                newCard.setAttribute('style',cardStyle);
+                containerList.appendChild(newCard);
+            },
+            rangeBetween:function(min,max){
+                return Math.floor(Math.random() * (max - min ) + min)
+            },
+        };
+        PAGE.init()
+    </script>
+</body>
+</html>

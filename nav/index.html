@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nav</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="section-banner h400">SECTION Banner</div>
+    <div class="navigator-bar" id="navigator-bar">
+        <ul>
+         <li class="navigator-bar-item" data-nav="section-1">SECTION 1</li>
+         <li class="navigator-bar-item" data-nav="section-2">SECTION 2</li>
+         <li class="navigator-bar-item" data-nav="section-3">SECTION 3</li>
+         <li class="navigator-bar-item" data-nav="section-4">SECTION 4</li>
+         <li class="navigator-bar-item" data-nav="section-5">SECTION 5</li>
+      </ul>
+    </div>
+    <div class="h400" id="section-1">SECTION 1</div>
+    <div class="h400" id="section-2">SECTION 2</div>
+    <div class="h400" id="section-3">SECTION 3</div>
+    <div class="h400" id="section-4">SECTION 4</div>
+    <div class="h400" id="section-5">SECTION 5</div>
+    <div class="h800">SECTION Footer</div>
+
+    <script type="text/javascript">
+        const PAGE = {
+            data:{
+                navArr:['section-1','section-2','section-3','section-4','section-5'],
+                navActive:'',
+                navOffset: 400,
+                navHeight: 60,
+            },
+            init:function(){
+                this.bind()
+            },
+            bind: function(){
+                window.addEventListener('scroll',this.refreshNav);
+                let navitems = document.getElementById('navigator-bar');
+                this.onEventListener(navitems,'click','navigator-bar-item',this.GoSection);
+            },
+            onEventListener:function(parentNode,action,childname,callback){
+                parentNode.addEventListener(action,function(e){
+                    if(e.target.className.indexOf(childname) >-1){
+                        callback(e)
+                    }
+                })
+            },
+            GoSection:function(e){
+                let id = e.target.dataset.nav;
+                let offsetTop = document.getElementById(id).offsetTop - PAGE.data.navHeight;
+                document.documentElement.scrollTop = offsetTop;
+            },
+            refreshNav: function(){
+                PAGE.fixedNav();
+                PAGE.lightNav();
+            },
+            fixedNav: function(){
+                let scrollTop = document.documentElement.scrollTop;
+                let navTop = PAGE.data.navOffset;
+                let nav = document.getElementById('navigator-bar')
+                if (scrollTop > navTop){
+                    nav.className = 'navigator-bar fixed-top'
+                }else{
+                    nav.className = 'navigator-bar'
+                }
+            },
+            lightNav:function(){
+                let scroll = document.documentElement.scrollTop;
+                let navScrolled = PAGE.data.navArr.filter(data =>{
+                    let nav = document.getElementById(data).offsetTop;
+                    return scroll + PAGE.data.navHeight >= nav;
+                });
+                let SectionActive = navScrolled.length ? navScrolled[navScrolled.length-1] : '' ;
+                let navitems = document.getElementsByClassName("navigator-bar-item");
+                for (let i = 0; i< navitems.length; i++){
+                    let navitem = navitems[i];
+                    let dataNav = navitem.dataset.nav;
+                    if (dataNav === SectionActive){
+                        navitem.className = 'navigator-bar-item active'
+                    }else{
+                        navitem.className = 'navigator-bar-item'
+                    }
+                }
+            }
+        }
+        PAGE.init()
+    </script>
+</body>
+</html>

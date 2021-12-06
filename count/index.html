@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>count</title>
+    <style>
+        .count-number-container{
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  line-height: 38px;
+}
+
+.count-number-btn_decrease,
+.count-number-btn_increase {
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  width: 40px;
+  height: auto;
+  text-align: center;
+  background: #f5f7fa;
+  color: #606266;
+  cursor: pointer;
+  font-size: 13px;
+  user-select:none;
+}
+
+.count-number-btn_decrease {
+  left: 1px;
+  border-radius: 4px 0 0 4px;
+  border-right: 1px solid #dcdfe6;
+}
+
+.count-number-btn_increase {
+  right: 1px;
+  border-radius: 0 4px 4px 0;
+  border-left: 1px solid #dcdfe6;
+}
+
+.count-number-input{
+  box-sizing: border-box;
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  padding: 0 50px;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  background-color: #fff;
+  font-size: inherit;
+  line-height: 40px;
+  color: #606266;
+  text-align: center;
+  outline: none;
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+}
+    </style>
+</head>
+<body>
+    <div class="count-wrapper">
+        <div class="count-number-container" id="count_1">
+          <span class="count-number-btn_decrease">-</span>
+          <span class="count-number-btn_increase">+</span>
+          <div class="count-number-content">
+            <input class="count-number-input" type="text" disabled name="count" value="0">
+          </div>
+        </div>
+      
+        <div class="count-number-container" id="count_2">
+          <span class="count-number-btn_decrease">-</span>
+          <span class="count-number-btn_increase">+</span>
+          <div class="count-number-content">
+            <input class="count-number-input" type="text" disabled name="count" value="0">
+          </div>
+        </div>
+      </div>
+</body>
+<script>
+    class Count{
+        constructor(prop){
+            this.state = {
+                id: prop.id,
+                value: prop.value || 0,
+                change: prop.change,
+            }
+        }
+    }
+</script>
+</html>

@@ -87,9 +87,10 @@
             </div>
           `}).join('');
 
-          let markelement = Object.keys(marks).map(function(key){
-          return `<span class="filter-item ${mark == key ? 'active' : ''}" data-id="${key}">${marks[key]}</span>`
-        }).join('');
+          let markelement = Object.keys(marks).map(key =>{
+             return`
+             <span class="filter-item ${mark == key ? 'active' : ''}" data-id="${key}">${marks[key]}</span>`
+           }).join('');
 
            let listcontainer = document.getElementById('todos-list');
            let markcontainer = document.getElementById('todos-filter');

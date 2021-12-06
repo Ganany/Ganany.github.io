@@ -2,144 +2,189 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>NavigatorBar</title>
+  <title>Count</title>
   <style type="text/css">
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .count-number-container{
+      position: relative;
+      display: inline-block;
+      width: 180px;
+      line-height: 38px;
     }
-    .h400{
-      height: 400px;
-      border: 1px solid #e4e4e4;
-      color: #666;
-      padding: 20px;
-    }
-    .h800{
-      height: 800px;
-      border: 1px solid #e4e4e4;
-      color: #666;
-      padding: 20px;
-    }
-    .navigator-bar {
-      height: 60px;
-    }
-    .navigator-bar ul{
-      display: flex;
-      list-style-type: none;
-      background: #f5f5f5;
-    }
-    .navigator-bar.fixed-top ul{
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-    .navigator-bar-item{
-      flex: 1;
-      line-height: 60px;
+
+    .count-number-btn_decrease,
+    .count-number-btn_increase {
+      position: absolute;
+      z-index: 1;
+      top: 1px;
+      width: 40px;
+      height: auto;
       text-align: center;
+      background: #f5f7fa;
+      color: #606266;
       cursor: pointer;
-      color: #666;
-      transition: all .2s ease;
+      font-size: 13px;
+      user-select:none;
     }
-    .navigator-bar-item:hover{
-      background: #666;
-      color: #fff;
+
+    .count-number-btn_decrease {
+      left: 1px;
+      border-radius: 4px 0 0 4px;
+      border-right: 1px solid #dcdfe6;
     }
-    .navigator-bar-item.active{
-      background: #333;
-      color: #fff;
+
+    .count-number-btn_increase {
+      right: 1px;
+      border-radius: 0 4px 4px 0;
+      border-left: 1px solid #dcdfe6;
+    }
+
+    .count-number-input{
+      box-sizing: border-box;
+      display: inline-block;
+      width: 100%;
+      height: 40px;
+      padding: 0 50px;
+      border-radius: 4px;
+      border: 1px solid #dcdfe6;
+      background-color: #fff;
+      font-size: inherit;
+      line-height: 40px;
+      color: #606266;
+      text-align: center;
+      outline: none;
+      transition: border-color .2s cubic-bezier(.645,.045,.355,1);
     }
   </style>
 </head>
 <body>
-  <div class="section-banner h400">SECTION Banner</div>
-  <div class="navigator-bar" id="navigator-bar">
-    <ul>
-      <li class="navigator-bar-item" data-nav="section-1">SECTION 1</li>
-      <li class="navigator-bar-item" data-nav="section-2">SECTION 2</li>
-      <li class="navigator-bar-item" data-nav="section-3">SECTION 3</li>
-      <li class="navigator-bar-item" data-nav="section-4">SECTION 4</li>
-      <li class="navigator-bar-item" data-nav="section-5">SECTION 5</li>
-    </ul>
+  <div class="count-wrapper">
+    <div class="count-number-container" id="count_1">
+      <!-- <span class="count-number-btn_decrease">-</span>
+      <span class="count-number-btn_increase">+</span>
+      <div class="count-number-content">
+        <input class="count-number-input" type="text" disabled name="count" value="0">
+      </div> -->
+    </div>
+
+    <div class="count-number-container" id="count_2">
+      <!-- <span class="count-number-btn_decrease">-</span>
+      <span class="count-number-btn_increase">+</span>
+      <div class="count-number-content">
+        <input class="count-number-input" type="text" disabled name="count" value="0">
+      </div> -->
+    </div>
   </div>
-  <div class="h400" id="section-1">SECTION 1</div>
-  <div class="h400" id="section-2">SECTION 2</div>
-  <div class="h400" id="section-3">SECTION 3</div>
-  <div class="h400" id="section-4">SECTION 4</div>
-  <div class="h400" id="section-5">SECTION 5</div>
-  <div class="h800">SECTION Footer</div>
 
   <script type="text/javascript">
-    const PAGE = {
-      data: {
-        navigatorBarIdArr: ['section-1','section-2','section-3','section-4','section-5'],
-        navigatorBarActiveId: '',
-        navigatorBarFixed: false,
-        navigatorBarFixedOffset: 460,
-        navigatorBarHeight: 60,
-      },
-      init: function() {
-        this.bind();
-      },
-      bind: function() {
-        window.addEventListener('scroll',this.refreshNavigator);
-        let navigatorBar = document.getElementById('navigator-bar');
-        this.onEventLister(navigatorBar,'click','navigator-bar-item',this.goNavigator);
-      },
-      onEventLister: function(parentNode,action,childClassName,callback) {
-        parentNode.addEventListener(action,function(e){
-          e.target.className.indexOf(childClassName) >= 0 && callback(e);
-        })
-      },
-      refreshNavigator: function(e) {
-        PAGE.fixedNavigator();
-        PAGE.heightLightNavigator();
-      },
-      fixedNavigator: function() {
-        let scrollTop = document.documentElement.scrollTop;
-        let navigatorBarTop = (PAGE.data.navigatorBarFixedOffset + PAGE.data.navigatorBarHeight);
-        let navigatorBarFixed = scrollTop >= navigatorBarTop;
-        if( PAGE.data.navigatorBarFixed !== navigatorBarFixed){
-          PAGE.data.navigatorBarFixed = navigatorBarFixed;
-          let navigatorBar = document.getElementById('navigator-bar');
-          if(navigatorBarFixed){
-            navigatorBar.className = 'navigator-bar fixed-top'
-          }else{
-            navigatorBar.className = 'navigator-bar'
-          }
-        }
-      },
-      heightLightNavigator: function() {
-        let scrollTop = document.documentElement.scrollTop;
-        let filterNav = PAGE.data.navigatorBarIdArr.filter( data => {
-          let offsetTop = document.getElementById(data).offsetTop;
-          return scrollTop >= offsetTop - PAGE.data.navigatorBarHeight
-        })
-        let navigatorBarActiveId = filterNav.length ? filterNav[filterNav.length - 1] : '';
-        if(PAGE.data.navigatorBarActiveId !== navigatorBarActiveId){
-          PAGE.data.navigatorBarActiveId = navigatorBarActiveId;
-          let navigatorBarItems = document.getElementsByClassName('navigator-bar-item');
-          for (let i = 0; i < navigatorBarItems.length; i++) {
-            let navigatorBarItem = navigatorBarItems[i];
-            let dataNav = navigatorBarItem.dataset.nav;
-            if(dataNav === navigatorBarActiveId){
-              navigatorBarItem.className = 'navigator-bar-item active';
-            }else{
-              navigatorBarItem.className = 'navigator-bar-item';
-            }
-          }
-        }
-      },
-      goNavigator: function(e) {
-        let id = e.target.dataset.nav;
-        let offsetTop = document.getElementById(id).offsetTop - PAGE.data.navigatorBarHeight;
-        document.documentElement.scrollTop = offsetTop;
+
+
+  class Count{
+    constructor(props) {
+      this.state = {
+        id: props.id,
+        value: props.value || 0,
+        change: props.change,
+        _countNumberInput:null,
+      };
+
+      this._$ = selector => document.querySelector(selector);//用于选择DOM
+      this._createElement = type => document.createElement(type);//用于创建DOM
+      this._setContent = (elem, content) => elem.textContent = content//用于文本赋值
+      this._appendChild = (container, node) => container.appendChild(node);//用于增加子节点
+
+      //启动流程
+      this._init();
+    }
+
+    _init(){
+      this._addHTML();
+    }
+
+    _addHTML(){
+      let $ = this._$;
+      let idContainer = $(`#${this.state.id}`);
+      let countNumberContainer = this._createElement('div');
+      let countNumberContent   = this._createElement('div');
+      let countNumberBtnDecrease = this._createElement('span');
+      let countNumberBtnIncrease = this._createElement('span');
+      let countNumberInput = this._createElement('input');
+      countNumberContent.setAttribute("class","count-number-content");
+      countNumberContainer.setAttribute("class","count-number-container");
+      countNumberBtnDecrease.setAttribute("class","count-number-btn_decrease");
+      countNumberBtnIncrease.setAttribute("class","count-number-btn_increase");
+      countNumberInput.setAttribute("class","count-number-input");
+      countNumberInput.setAttribute('type','text');
+      countNumberInput.value = this.state.value;
+      countNumberInput.disabled = true;
+      this._setContent(countNumberBtnIncrease,'+');
+      this._setContent(countNumberBtnDecrease,'-');
+      this._appendChild(countNumberContent,countNumberInput);
+      this._appendChild(countNumberContainer,countNumberBtnDecrease);
+      this._appendChild(countNumberContainer,countNumberBtnIncrease);
+      this._appendChild(countNumberContainer,countNumberContent);
+      this._appendChild(idContainer,countNumberContainer);
+      this.state._countNumberInput = countNumberInput;
+
+      // 绑定事件
+      countNumberBtnDecrease.addEventListener('click',this.decrease.bind(this));
+      countNumberBtnIncrease.addEventListener('click',this.increase.bind(this));
+    }
+
+
+    // 设置元素
+    setValue(val){
+      let isNumber = (typeof val === 'number' );
+      if(isNumber){
+        this.state.value = val;
+        this.state._countNumberInput.value = val;
+        typeof this.state.change === 'function' && this.state.change(val)
+      }else{
+        console.log('参数必须为数字')
       }
     }
 
-    PAGE.init();
+    // 减少
+    decrease(){
+      let value = this.state.value - 1;
+      this.setValue(value)
+    }
+
+    // 增加
+    increase(){
+      let value = this.state.value + 1;
+      this.setValue(value)
+    }
+  }
+
+
+  const PAGE = {
+    data: {
+      count_1: null,
+      count_2: null
+    },
+    init:function(){
+      this.initCount();
+    },
+    initCount:function(){
+      PAGE.data.count_1 = new Count({
+        id: 'count_1',
+        value: 1,
+        change:function(val){
+          console.log(val)
+        }
+      })
+
+      PAGE.data.count_2 = new Count({
+        id: 'count_2',
+        value: 10,
+        change:function(val){
+          console.log(val)
+        }
+      })
+    }
+  }
+
+  PAGE.init();
   </script>
 </body>
 </html>
