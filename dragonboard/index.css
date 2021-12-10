@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header-container{
+    margin: 0 auto;
+}
+.page-header{
+    width: 960px;
+    height: 74px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.jiker-logo-container{
+    cursor: pointer;
+}
+.login-container{
+    display: flex;
+}
+.login-line{
+    margin-left: 15px;
+    margin-right: 15px;
+    opacity: 0.5;
+}
+.login-text:hover{
+    cursor: pointer;
+    color: RGBA(57, 195, 95, 1);
+}
+.banner-container{
+    min-width: 960px;
+    height: 426px;
+    background: url(./images/banner.jpg) no-repeat center;
+    text-align: center;
+    padding-top: 150px;
+}
+.banner-title{
+    color: white;
+    font-size: 40px;
+}
+.navs-container{
+    display: flex;
+    height: 74px;
+    max-width: 1920px;
+    min-width: 960px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #153188;
+}
+.nav{
+    width: 192px;
+    height: 74px;
+    color: white;
+    font-size: 16px;
+    line-height: 74px;
+    text-align: center;
+}
+.nav:hover{
+    cursor: pointer;
+    background-color: #2D4694;
+}
+.mainer-container{
+    width: 960px;
+    margin: 0 auto;
+}
+.course-intro-container{
+    margin-top: 70px;
+}
+.part-title-container{
+    position: relative;
+    width: 140px;
+    height: 42px;
+}
+.part-title{
+    position: absolute;
+    top: -10px;
+    left: 24px;
+    font-size: 20px;
+    color: #153188;
+    font-family: Lantinghei SC;
+    font-weight: 600;
+}
+.course-intro-text{
+    width: 940px;
+    font-size: 14px;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    color: #333333;
+    line-height: 30px;
+    margin-top: 30px;
+    text-align: justify;
+}
+.course-watch-container{
+    margin-top: 64px;
+}
+.video-container{
+    margin-top: 29px;
+    width: 960px;
+    height: 540px;
+    overflow: hidden;
+    text-align: center;
+    object-fit: cover;
+    background: url(./images/v.jpg) no-repeat center;
+}
+video{
+    width: 960px;
+    height: 540px;
+}
+/*.video-part{
+    position: relative;
+}
+.video-control{
+    width: 24px;
+    height: 30px;
+    box-sizing: content-box;
+    background: transparent;
+    border-top: rgba(255, 255, 255) solid 22px;
+    border-bottom: rgba(255, 255, 255) solid 22px;
+    border-left: rgba(255, 255, 255) solid 25px;
+    border-right: rgba(255, 255, 255) solid 25px;
+    border-radius: 50%;
+    position: absolute;
+    top: 220px;
+    left: 444px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.control-center{
+    width: 26px;
+    height: 32px;
+    border-left: transparent solid 26px;
+    border-top: rgba(255, 255, 255) solid 16px;
+    border-bottom:rgba(255, 255, 255) solid 16px;
+    border-right: 0px;
+}*/
+.list-title{
+    width: 960px;
+    text-align: left;
+    font-size: 18px;
+    font-family: MicrosoftYaHei;
+    font-weight: 500;
+    color: #333333;
+    line-height: 11px;
+    margin-top: 25px;
+}
+.list-subtitle{
+    margin-top: 14px;
+    font-size: 12px;
+    font-family: Lantinghei SC;
+    font-weight: 400;
+    color: #999999;
+    line-height: 11px;
+    letter-spacing: 1.5px;
+}
+.list-mainer{
+    width: 960px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 18px;
+}
+.list-mainer-left{
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+.list-part-title-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 700px;
+    height: 40px;
+    background: #F7F7F7;
+    box-shadow: 0px 1px 0px 0px #E4E4E4;
+    padding-left: 23px;
+    padding-right: 20px;
+}
+.list-part-lefttitle-btn{
+    display: inline-block;
+    width: 14px;
+    height: 12px;
+    cursor: pointer;
+}
+.list-part-lefttitle-text{
+    padding-left: 13px;
+    display: inline-block;
+    height: 14px;
+    font-size: 14px;
+    font-family: Lantinghei SC;
+    font-weight: 600;
+    color: #333333;
+    line-height: 14px;
+}
+.list-part-righttitle{
+    background: url(./images/download-icon.png) no-repeat center;
+    width: 20px;
+    height: 18px;
+    cursor: pointer;
+}
+.list-part-righttitle:hover{
+    background: url(./images/download-icon-hover.png) no-repeat center;
+}
+.list-part-content{
+    width: 700px;
+    height: 40px;
+    box-shadow: 0px -1px 0px 0px #F5F5F5;
+    background: #FFFFFF;
+    padding-left: 51px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.list-part-leftcontent,.list-part-rightcontent{
+    font-size: 12px;
+    font-family: FZLTHK;
+    font-weight: normal;
+    color: #666666;
+    line-height: 40px;
+}
+.list-part-content:hover {
+    cursor: pointer;
+}
+.list-part-content:hover > .list-part-leftcontent{
+    color: #009DF7;
+}
+.list-mainer-right{
+    width: 230px;
+}
+.course-info-title{
+    font-size: 16px;
+    font-family: Lantinghei SC;
+    font-weight: 600;
+    color: #333333;
+}
+.course-info-content{
+    width: 100%;
+    margin-top: 16px;
+}
+.course-info-subtitle{
+    font-size: 12px;
+    font-family: Lantinghei SC;
+    font-weight: 500;
+    color: #999999;
+    display: inline-block;
+    margin-top: 16px;
+}
+.people-text{
+    margin-top: 9px;
+    font-size: 12px;
+    font-family: Lantinghei SC;
+    font-weight: 500;
+    color: #666666;
+}
+.number-text{
+    font-size: 12px;
+    font-family: Lantinghei SC;
+    font-weight: 500;
+    color: #666666;
+    margin-left: 11px;
+}
