@@ -152,10 +152,12 @@ const PAGE ={
         let scrollTop = document.documentElement.scrollTop;
         let navTop = PAGE.data.navOffset;
         let nav = document.getElementById('navigator-bar')
-        if (scrollTop > navTop){
-            nav.className = 'navigator-bar fixed-navs'
-        }else{
+        if (scrollTop < navTop){
+            
             nav.className = 'navigator-bar'
+        }else{
+            nav.className = 'navigator-bar fixed-navs'
+           
         }
     },
     lightNav:function(){
