@@ -39,7 +39,7 @@ const PAGE ={
             let divlength = list.children.length;
             let totalHeight = 40 *  divlength;
             e.target.className = 'arrow-icon';
-            PAGE.animate(0,totalHeight,40,function(value){
+            PAGE.animate(0,totalHeight,10,function(value){
                 list.style.height = `${value}px`
             },function(){
                 list.style.height = `${totalHeight}px`
@@ -47,7 +47,7 @@ const PAGE ={
             //lists[index].className = "list-part-content-container"
         }else if(className === "arrow-icon"){
             e.target.className = 'arrow-icon unshow';
-            PAGE.animate(height,0,40,function(value){
+            PAGE.animate(height,0,10,function(value){
                 lists[index].style.height = `${value}px`
             },function(){
                 lists[index].style.height = `0px`
