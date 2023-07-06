@@ -1,158 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDOs</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
     <div class="todos-container">
-        <h1 class="todos-title">todos</h1>
-        <div class="todos-content">
-          <div class="todos-input-cell">
-            <input id="todo-input" class="todos-input" type="text" name="todo" placeholder="今天你要干啥？？？？">
+      <h1 class="todos-title">todos</h1>
+      <div class="todos-content">
+        <div class="todos-input-cell">
+          <input id="todo-input" class="todos-input" type="text" name="todo" placeholder="今天你要干啥？？？？" />
+        </div>
+        <div id="todos-list" class="todos-list">
+          <div class="todo-item">
+            <div class="todo-item-hd"></div>
+            <div class="todo-item-bd">吃饭</div>
+            <div class="todo-item-ft">x</div>
           </div>
-          <div id="todos-list" class="todos-list">
-            <div class="todo-item">
-              <div class="todo-item-hd"></div>
-              <div class="todo-item-bd">吃饭</div>
-              <div class="todo-item-ft">x</div>
-            </div>
-            <div class="todo-item active">
-              <div class="todo-item-hd"></div>
-              <div class="todo-item-bd">睡觉</div>
-              <div class="todo-item-ft">x</div>
-            </div>
-          </div>
-          <div class="todos-filter" id="todos-filter">
-            <span class="filter-item active">全部</span>
-            <span class="filter-item">待办</span>
-            <span class="filter-item">已办</span>
+          <div class="todo-item active">
+            <div class="todo-item-hd"></div>
+            <div class="todo-item-bd">睡觉</div>
+            <div class="todo-item-ft">x</div>
           </div>
         </div>
+        <div class="todos-filter" id="todos-filter">
+          <span class="filter-item active">全部</span>
+          <span class="filter-item">待办</span>
+          <span class="filter-item">已办</span>
+        </div>
       </div>
+    </div>
     <script type="text/javascript">
-   const PAGE ={
-       data:{
-           todos: [
-               {title:'吃饭',
-               completed: false
-            },{title:'睡觉',
-                completed: true
-            }],
-            marks:{
-                1:'全部',
-                2:'待办',
-                3:'已办',
-            },
-            mark:1
-       },
-       init:function(){
-           this.bind();
-           this.getdata();
-       },
-       getdata:function(){
-           let todos = localStorage.getItem('savedata');
-           let datas = JSON.parse(todos) || [];
-           PAGE.data.todos = datas;
-           this.render()
-       },
-       render:function(){
-           let list = this.data.todos;
-           let marks = this.data.marks;
-           let mark = this.data.mark;
-           list.forEach((data,index)=> data.index = index);
-           
-           let showlist;
-           switch (mark) {
-               case 2:
-                   showlist = list.filter(data=> !data.completed);
-                break;
-                case 3:
-                   showlist = list.filter(data=> data.completed);
-                break;
-                default:
-                    showlist = list;
-                break;
-           };
+      const PAGE = {
+        data: {
+          todos: [
+            { title: "吃饭", completed: false },
+            { title: "睡觉", completed: true },
+          ],
+          marks: {
+            1: "全部",
+            2: "待办",
+            3: "已办",
+          },
+          mark: 1,
+        },
+        init: function () {
+          this.bind()
+          this.getdata()
+        },
+        getdata: function () {
+          let todos = localStorage.getItem("savedata")
+          let datas = JSON.parse(todos) || []
+          PAGE.data.todos = datas
+          this.render()
+        },
+        render: function () {
+          let list = this.data.todos
+          let marks = this.data.marks
+          let mark = this.data.mark
+          list.forEach((data, index) => (data.index = index))
 
-           let listelement = showlist.map( data =>{
-          return `
-            <div class="todo-item ${data.completed ? 'active' : ''}" data-index="${data.index}">
+          let showlist
+          switch (mark) {
+            case 2:
+              showlist = list.filter((data) => !data.completed)
+              break
+            case 3:
+              showlist = list.filter((data) => data.completed)
+              break
+            default:
+              showlist = list
+              break
+          }
+
+          let listelement = showlist
+            .map((data) => {
+              return `
+            <div class="todo-item ${data.completed ? "active" : ""}" data-index="${data.index}">
               <div class="todo-item-hd"></div>
               <div class="todo-item-bd">${data.title}</div>
               <div class="todo-item-ft">x</div>
             </div>
-          `}).join('');
+          `
+            })
+            .join("")
 
-          let markelement = Object.keys(marks).map(key =>{
-             return`
-             <span class="filter-item ${mark == key ? 'active' : ''}" data-id="${key}">${marks[key]}</span>`
-           }).join('');
+          let markelement = Object.keys(marks)
+            .map((key) => {
+              return `
+             <span class="filter-item ${mark == key ? "active" : ""}" data-id="${key}">${marks[key]}</span>`
+            })
+            .join("")
 
-           let listcontainer = document.getElementById('todos-list');
-           let markcontainer = document.getElementById('todos-filter');
-           listcontainer.innerHTML = listelement;
-           markcontainer.innerHTML = markelement;
-       },
-       bind:function(){
-           let input = document.getElementById('todo-input');
-           let list = document.getElementById('todos-list');
-           let mark = document.getElementById('todos-filter');
-           input.addEventListener('keyup',this.addlist);
-           this.check(list,'todo-item-hd',this.change);
-           this.check(list,'todo-item-ft',this.remove);
-           this.check(mark,'filter-item',this.filter);
-           window.addEventListener('unload',this.savetodos);
-       },
-       savetodos:function(){
-            let todos = PAGE.data.todos;
-            let todosstr = JSON.stringify(todos);
-            localStorage.setItem('savedata',todosstr);
-       },
-       addlist:function(e){
-           let value = this.value.trim();
-           if (e.which === 13 && value){
-               let list = PAGE.data.todos;
-               list.push({
-                   title: value,
-                   completed:false,
-                } );
-                this.value = ''
-                PAGE.render();
-           }
-       },
-       check:function(parent,child,callback){
-           parent.addEventListener('click',function(e){
-               if (e.target.className.indexOf(child)>=0){
-                   callback(e)
-               }
-           })
-       },
-       change:function(e){
-            let list = PAGE.data.todos;
-            let listdetail = e.target.parentNode;
-            let index = listdetail.dataset.index;
-            list[index].completed = !list[index].completed;
+          let listcontainer = document.getElementById("todos-list")
+          let markcontainer = document.getElementById("todos-filter")
+          listcontainer.innerHTML = listelement
+          markcontainer.innerHTML = markelement
+        },
+        bind: function () {
+          let input = document.getElementById("todo-input")
+          let list = document.getElementById("todos-list")
+          let mark = document.getElementById("todos-filter")
+          input.addEventListener("keyup", this.addlist)
+          this.check(list, "todo-item-hd", this.change)
+          this.check(list, "todo-item-ft", this.remove)
+          this.check(mark, "filter-item", this.filter)
+          window.addEventListener("unload", this.savetodos)
+        },
+        savetodos: function () {
+          let todos = PAGE.data.todos
+          let todosstr = JSON.stringify(todos)
+          localStorage.setItem("savedata", todosstr)
+        },
+        addlist: function (e) {
+          let value = this.value.trim()
+          if (e.which === 13 && value) {
+            let list = PAGE.data.todos
+            list.push({
+              title: value,
+              completed: false,
+            })
+            this.value = ""
             PAGE.render()
-       },
-       remove:function(e){
-            let list = PAGE.data.todos;
-            let listdetail = e.target.parentNode;
-            let index = listdetail.dataset.index;
-            list.splice(index,1);
-            PAGE.render();
-       },
-       filter:function(e){
-           let markdetail = e.target;
-           let id = markdetail.dataset.id;
-           PAGE.data.mark = Number(id);
-           PAGE.render();
-       }
-   }
-   PAGE.init()
-   </script>
-</body>
+          }
+        },
+        check: function (parent, child, callback) {
+          parent.addEventListener("click", function (e) {
+            if (e.target.className.indexOf(child) >= 0) {
+              callback(e)
+            }
+          })
+        },
+        change: function (e) {
+          let list = PAGE.data.todos
+          let listdetail = e.target.parentNode
+          let index = listdetail.dataset.index
+          list[index].completed = !list[index].completed
+          PAGE.render()
+        },
+        remove: function (e) {
+          let list = PAGE.data.todos
+          let listdetail = e.target.parentNode
+          let index = listdetail.dataset.index
+          list.splice(index, 1)
+          PAGE.render()
+        },
+        filter: function (e) {
+          let markdetail = e.target
+          let id = markdetail.dataset.id
+          PAGE.data.mark = Number(id)
+          PAGE.render()
+        },
+      }
+      PAGE.init()
+    </script>
+  </body>
 </html>
