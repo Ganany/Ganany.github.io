@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>前端实战项目之路</title>
+    <link rel="stylesheet" href="./css/basic.css" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.13/lib/theme-chalk/index.css" />
+  </head>
+  <script src="./js/vue.js"></script>
+  <script src="./js/element.js"></script>
+
+  <body>
+    <div id="app">
+      <div class="page-title">前端实战项目</div>
+      <div class="project-list">
+        <div class="project-card" v-for="(item,index) in projectData" :key="index">
+          <el-card shadow="hover" :body-style="{ padding: '20px' }">
+            <div slot="header">
+              <span>{{item.name}}</span>
+            </div>
+            <!-- card body -->
+            <el-form :model="item" label-width="150px" :inline="false" size="mini">
+              <el-form-item label="所需技能：">
+                <span>{{item.needSkills.join('、')}}</span>
+              </el-form-item>
+              <el-form-item label="项目重要度：">
+                <el-rate v-model="item.importance" disabled></el-rate>
+              </el-form-item>
+              <el-form-item label="项目难度：">
+                <el-rate v-model="item.difficulty" disabled></el-rate>
+              </el-form-item>
+              <el-form-item label="项目示例：">
+                <el-link type="primary" :underline="false" :href="`../${item.key}/index.html`" target="_blank"
+                  >{{item.name}}</el-link
+                >
+              </el-form-item>
+              <el-form-item label="项目预览：">
+                <el-image
+                  class="image-preview"
+                  fit="cover"
+                  :src="`./image/${item.key}.png`"
+                  :preview-src-list="[`./image/${item.key}.png`]"
+                  lazy
+                >
+                </el-image>
+              </el-form-item>
+              <el-form-item label="花费时长：" required>
+                <el-input
+                  v-model="stuProjectInfo[item.key].spendTime"
+                  size="mini"
+                  :disabled="stuProjectInfo[item.key].finish_at"
+                  style="width: 120px"
+                  clearable
+                >
+                  <template slot="append">天</template></el-input
+                >
+              </el-form-item>
+              <el-form-item label="自我评价：" required>
+                <el-radio-group
+                  v-model="stuProjectInfo[item.key].selfRate"
+                  size="mini"
+                  :disabled="stuProjectInfo[item.key].finish_at"
+                >
+                  <el-radio-button label="一坨答辩"></el-radio-button>
+                  <el-radio-button label="马马虎虎"></el-radio-button>
+                  <el-radio-button label="平均水准"></el-radio-button>
+                  <el-radio-button label="虎躯一震"></el-radio-button>
+                  <el-radio-button label="劳资最强"></el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+              <el-form-item label="心得感想：" required>
+                <el-input
+                  v-model="stuProjectInfo[item.key].studentAssessment"
+                  :disabled="stuProjectInfo[item.key].finish_at"
+                  size="mini"
+                  type="textarea"
+                  placeholder="请输入内容"
+                  style="width: 480px"
+                  maxlength="100"
+                  show-word-limit
+                  :autosize="{ minRows: 4, maxRows: 6 }"
+                >
+                </el-input>
+              </el-form-item>
+
+              <el-form-item v-if="stuProjectInfo[item.key].finish_at" label="完成时间：">
+                <span>{{stuProjectInfo[item.key].finish_at}}</span>
+              </el-form-item>
+              <el-form-item v-else>
+                <el-button @click="onFinish(item.key)">我已完成</el-button>
+              </el-form-item>
+            </el-form>
+          </el-card>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      created() {
+        let info = localStorage.getItem("stuProjectInfo")
+        this.stuProjectInfo = {
+          ...this.initInfo(),
+          ...(info ? JSON.parse(info) : {}),
+        }
+      },
+      data() {
+        return {
+          projectData: [
+            {
+              name: "百度首页",
+              needSkills: ["HTML", "CSS"],
+              key: "baidu",
+              difficulty: 1,
+              importance: 3,
+            },
+            {
+              name: "搜狗首页",
+              needSkills: ["HTML", "CSS"],
+              key: "sogou",
+              difficulty: 1,
+              importance: 3,
+            },
+            {
+              name: "抖音",
+              needSkills: ["HTML", "CSS"],
+              key: "tiktok",
+              difficulty: 1.5,
+              importance: 3,
+            },
+            {
+              name: "Android",
+              needSkills: ["HTML", "CSS", "CSS动画"],
+              key: "android",
+              difficulty: 2,
+              importance: 1,
+            },
+            {
+              name: "Jiker 学习路径",
+              needSkills: ["HTML", "CSS"],
+              key: "jiker-page-learn",
+              difficulty: 2,
+              importance: 3,
+            },
+            {
+              name: "Jiker 课程详情",
+              needSkills: ["HTML", "CSS"],
+              key: "jiker-page",
+              difficulty: 2.5,
+              importance: 3.5,
+            },
+            {
+              name: "Toppro 首页",
+              needSkills: ["HTML", "CSS"],
+              key: "jiker-toppro",
+              difficulty: 2.5,
+              importance: 3.5,
+            },
+            {
+              name: "原生 TodoList",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "jiker-todos",
+              difficulty: 4,
+              importance: 5,
+            },
+            {
+              name: "页面分页",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "pagination",
+              difficulty: 3,
+              importance: 3.5,
+            },
+            {
+              name: "盒子拖动",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "message-board-demo",
+              difficulty: 3.5,
+              importance: 4,
+            },
+            {
+              name: "答题页面",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "question",
+              difficulty: 3,
+              importance: 3,
+            },
+            {
+              name: "留言板",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "board-message",
+              difficulty: 4,
+              importance: 3.5,
+            },
+            {
+              name: "导航",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "nav",
+              difficulty: 3,
+              importance: 3.5,
+            },
+            {
+              name: "轮播图",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "swiper",
+              difficulty: 3.5,
+              importance: 3.5,
+            },
+            {
+              name: "极客学院",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "jiker-school",
+              difficulty: 4,
+              importance: 4,
+            },
+          ],
+
+          stuProjectInfo: {},
+        }
+      },
+      methods: {
+        onFinish(key) {
+          if (!this.stuProjectInfo[key].spendTime) {
+            this.$message({
+              message: "请填写花费时长",
+              type: "warning",
+            })
+            return
+          }
+          // 对花费时长进行数字和小数的校验
+          if (!/^\d+(\.\d+)?$/.test(this.stuProjectInfo[key].spendTime)) {
+            this.$message({
+              message: "花费时长只能为数字",
+              type: "warning",
+            })
+            return
+          }
+          if (!this.stuProjectInfo[key].selfRate) {
+            this.$message({
+              message: "请进行自我评价",
+              type: "warning",
+            })
+            return
+          }
+          if (!this.stuProjectInfo[key].studentAssessment) {
+            this.$message({
+              message: "请填写心得感想",
+              type: "warning",
+            })
+            return
+          }
+          this.$confirm("提交后不可更改，确定要提交吗？", "提示", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning",
+          })
+            .then(() => {
+              const now = new Date()
+              this.stuProjectInfo[key].finish_at = now.toLocaleDateString() + " " + now.toLocaleTimeString()
+              localStorage.setItem("stuProjectInfo", JSON.stringify(this.stuProjectInfo))
+              this.$message({
+                message: "恭喜你，完成了一个项目",
+                type: "success",
+              })
+            })
+            .catch(() => {
+              this.$message({
+                type: "info",
+                message: "已取消提交",
+              })
+            })
+        },
+        initInfo() {
+          let info = {}
+          this.projectData.forEach((item) => {
+            info[item.key] = {
+              selfRate: null,
+              studentAssessment: "",
+              spendTime: "",
+              finish_at: false,
+            }
+          })
+          return info
+        },
+      },
+    })
+  </script>
+</html>
+<style></style>

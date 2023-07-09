@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
+    sans-serif;
+}
+html,
+body,
+#app {
+  height: 100%;
+  overflow: auto;
+}
+#app {
+  background: url("../image/background.jpg") fixed #000 !important;
+  background-size: cover !important;
+}
+.page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 50px 0 0;
+  font-size: 24px;
+  font-weight: 600;
+  background: radial-gradient(circle, #61706d 0, #0c6d56 20px, transparent 0, transparent 100%) calc(50% - 64px) 12px,
+    radial-gradient(circle, #5b564a 0, #775b13 12px, transparent 0, transparent 100%) calc(50% + 68px) 30px;
+  background-repeat: no-repeat;
+}
+.page-title::before,
+.page-title::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #3f5b68;
+}
+.page-title::before {
+  margin-right: 16px;
+}
+.page-title::after {
+  margin-left: 16px;
+}
+.project-list {
+  width: 960px;
+  margin: 0 auto;
+}
+.project-card {
+  margin-bottom: 24px;
+}
+.image-preview {
+  width: 360px;
+  aspect-ratio: 16/9;
+  border-radius: 5px;
+}
+
+.el-card,
+.el-input-group__append,
+.el-button,
+.el-input__count {
+  background: transparent !important;
+}
+.el-input-group--append .el-input__inner,
+.el-textarea textarea,
+.el-input-group__prepend {
+  background: transparent !important;
+  color: #fff;
+}
+.el-radio-button--mini .el-radio-button__inner {
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.75);
+}
+.el-radio-button__inner:hover {
+  color: #409eff !important;
+}
+.el-radio-button__orig-radio:checked + .el-radio-button__inner {
+  color: #409eff !important;
+}
+.el-card__header {
+  font-weight: 500 !important;
+}
+.el-form-item__label {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+.el-link--inner {
+  color: #99ccff !important;
+}
+.el-rate {
+  margin-top: 4px;
+}
+.el-message-box {
+  background-color: #d73563 !important;
+}
