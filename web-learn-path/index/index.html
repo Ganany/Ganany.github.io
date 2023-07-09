@@ -24,16 +24,19 @@
               <el-form-item label="所需技能：">
                 <span>{{item.needSkills.join('、')}}</span>
               </el-form-item>
-              <el-form-item label="项目重要度：">
+              <el-form-item label="重要度：">
                 <el-rate v-model="item.importance" disabled></el-rate>
               </el-form-item>
               <el-form-item label="项目难度：">
                 <el-rate v-model="item.difficulty" disabled></el-rate>
               </el-form-item>
-              <el-form-item label="项目示例：">
+              <el-form-item label="示例演示：">
                 <el-link type="primary" :underline="false" :href="`../${item.key}/index.html`" target="_blank"
                   >{{item.name}}</el-link
                 >
+              </el-form-item>
+              <el-form-item label="案例描述：">
+                <span>{{item.des}}</span>
               </el-form-item>
               <el-form-item label="项目预览：">
                 <el-image
@@ -41,7 +44,6 @@
                   fit="cover"
                   :src="`./image/${item.key}.png`"
                   :preview-src-list="[`./image/${item.key}.png`]"
-                  lazy
                 >
                 </el-image>
               </el-form-item>
@@ -112,6 +114,7 @@
           projectData: [
             {
               name: "百度首页",
+              des: "简单页面绘制",
               needSkills: ["HTML", "CSS"],
               key: "baidu",
               difficulty: 1,
@@ -119,6 +122,7 @@
             },
             {
               name: "搜狗首页",
+              des: "简单页面绘制",
               needSkills: ["HTML", "CSS"],
               key: "sogou",
               difficulty: 1,
@@ -126,6 +130,7 @@
             },
             {
               name: "抖音",
+              des: "视频背景页面练习",
               needSkills: ["HTML", "CSS"],
               key: "tiktok",
               difficulty: 1.5,
@@ -133,6 +138,7 @@
             },
             {
               name: "Android",
+              des: "CSS动画练习，CSS锦上添花之作",
               needSkills: ["HTML", "CSS", "CSS动画"],
               key: "android",
               difficulty: 2,
@@ -140,6 +146,7 @@
             },
             {
               name: "Jiker 学习路径",
+              des: "复杂页面绘制",
               needSkills: ["HTML", "CSS"],
               key: "jiker-page-learn",
               difficulty: 2,
@@ -147,6 +154,7 @@
             },
             {
               name: "Jiker 课程详情",
+              des: "复杂页面绘制",
               needSkills: ["HTML", "CSS"],
               key: "jiker-page",
               difficulty: 2.5,
@@ -154,6 +162,7 @@
             },
             {
               name: "Toppro 首页",
+              des: "负责页面绘制",
               needSkills: ["HTML", "CSS"],
               key: "jiker-toppro",
               difficulty: 2.5,
@@ -161,13 +170,15 @@
             },
             {
               name: "原生 TodoList",
+              des: "简单页面交互，DOM操作练习，经典案例。必学！",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
-              key: "jiker-todos",
+              key: "todos",
               difficulty: 4,
               importance: 5,
             },
             {
               name: "页面分页",
+              des: "原生实现前端常规功能，用于评论数据分页展示",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "pagination",
               difficulty: 3,
@@ -175,6 +186,7 @@
             },
             {
               name: "盒子拖动",
+              des: "原生实现前端常规功能，拖动操作的 DOM 元素",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "message-board-demo",
               difficulty: 3.5,
@@ -182,6 +194,7 @@
             },
             {
               name: "答题页面",
+              des: "Jiker 答题交互",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "question",
               difficulty: 3,
@@ -189,6 +202,7 @@
             },
             {
               name: "留言板",
+              des: "原生实现前端常见功能",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "board-message",
               difficulty: 4,
@@ -196,6 +210,7 @@
             },
             {
               name: "导航",
+              des: "前端常规功能，导航栏的实现",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "nav",
               difficulty: 3,
@@ -203,17 +218,35 @@
             },
             {
               name: "轮播图",
+              des: "前端常规功能，轮播图的实现",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "swiper",
               difficulty: 3.5,
               importance: 3.5,
             },
             {
+              name: "拖动列表",
+              des: "前端常规功能，拖动列表的实现（个人实现的不好，望后人改进）",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "draggable",
+              difficulty: 3,
+              importance: 3.5,
+            },
+            {
               name: "极客学院",
+              des: "原生实现前端页面和功能，涉及导航栏和下拉菜单的实现",
               needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
               key: "jiker-school",
               difficulty: 4,
               importance: 4,
+            },
+            {
+              name: "Jiker Todo",
+              des: "经典案例的二次回顾，加深对经典案例的理解",
+              needSkills: ["HTML", "CSS", "JavaScript", "DOM", "ES6(可选)"],
+              key: "jiker-todos",
+              difficulty: 4,
+              importance: 5,
             },
           ],
 
